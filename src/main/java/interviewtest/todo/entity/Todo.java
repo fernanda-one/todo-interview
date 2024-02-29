@@ -2,10 +2,8 @@ package interviewtest.todo.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Setter
@@ -15,11 +13,15 @@ import lombok.Setter;
 @Table(name = "todos")
 public class Todo {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     private String name;
 
     private String description;
+
+    @Column(columnDefinition = "boolean default false")
+    private Boolean status;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
